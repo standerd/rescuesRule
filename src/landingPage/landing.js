@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import ThankYou from "../thankYou/thankYou";
+import { withRouter } from "react-router-dom";
 import "./landing.css";
 
 class Landing extends Component {
@@ -9,7 +9,7 @@ class Landing extends Component {
     email: "",
     telNo: "",
     donation: "",
-    committed: false
+    loading: false
   };
 
   onChangeHandler = name => e => {
@@ -18,6 +18,7 @@ class Landing extends Component {
 
   onSubmitHandler = e => {
     e.preventDefault();
+    this.setState({ loading: true });
     const templateId = "template_050fCUxk";
 
     this.sendFeedback(templateId, {
@@ -35,7 +36,9 @@ class Landing extends Component {
       .send("gmail", templateId, variables)
       .then(res => {
         console.log("Email successfully sent!");
-        this.setState({ committed: true });
+        this.setState({ laoding: false }, () => {
+          this.props.history.push("/thanks");
+        });
       })
       // Handle errors here however you like, or use a React error boundary
       .catch(err =>
@@ -47,23 +50,23 @@ class Landing extends Component {
   }
 
   render() {
-    let info;
+    let display;
 
-    !this.state.committed
-      ? (info = (
+    !this.state.loading
+      ? (display = (
           <div className="content">
             <h1 style={{ textAlign: "center" }}>
               Please Help Us Make A Difference
             </h1>
             <div className="landingImages">
               <div className="fromThis">
-                <h3 style={{ textAlign: "center" }}>From This</h3>
+                <h3 style={{ textAlign: "center" }}>BEFORE</h3>
                 <img src={require("../images/winston1.jpg")} alt="dog1" />
                 <br></br>
-                <img src={require("../images/winston2.jpg")} alt="dog2" />
+                <img src={require("../images/hiccup2.jpg")} alt="dog2" />
               </div>
               <div className="toThis">
-                <h3 style={{ textAlign: "center" }}>To This</h3>
+                <h3 style={{ textAlign: "center" }}>AFTER</h3>
                 <img src={require("../images/winston2.jpg")} alt="dog3" />
                 <img src={require("../images/hiccup1.jpg")} alt="dog3" />
                 <br></br>
@@ -74,31 +77,36 @@ class Landing extends Component {
             <p>
               In order to support the pooches in need at DogTown we have decided
               to pack our racing shoes away for this year's 947 Ride Joburg and
-              rather raise some money to help the wonderfull people of dogtown.
+              rather raise some money to help the wonderful people of DogTown.
             </p>
             <h3>How to Help</h3>
             <p>
-              If you would like to make a contribution to our cause, There are a
-              couple of options.
+              If you would like to make a contribution to our cause, please fill
+              out the form on the left, or on your phone the form at the top.
             </p>
             <p>
-              Please click on The Dogtown SA Link{" "}
-              <a href="https://barkingmad.co.za/">DogTown SA</a>. You will be
-              redirected to their site, where you can make a donation online.
+              This will redirect you to a different page that will contain a
+              link where you can directly make a contribution to DogTown on
+              their website.
             </p>
             <p>
-              Alternatly you can do an eft directly into their bank account.
-              Details in the info section.
+              We will not share your details, but would appreciate it if you can complete the form so we can keep track of donations. However, if you wish to not submit your details please still click on the submit button leaving all the fields blank, and you
+              will also be redirected to the donation link.
             </p>
             <p>
-              For both options of donation we please ask that you complete the
-              donate form. This is not compulsory, we do however want to keep
-              track of the donations and be able to report back to you on our
-              success.
+              We thank you for taking the time to 
+              help us to help the POOCHES in need.
             </p>
           </div>
         ))
-      : (info = <ThankYou />);
+      : (display = (
+          <div className="spinner">
+            <h1>Loading Please Wait</h1>
+            <div className="lds-circle">
+              <div></div>
+            </div>
+          </div>
+        ));
 
     return (
       <div className="mainLanding">
@@ -142,7 +150,7 @@ class Landing extends Component {
             ></input>
             <input
               type="text"
-              placeholder="Donation"
+              placeholder="Donation Amount"
               value={this.state.donation}
               onChange={this.onChangeHandler("donation")}
             ></input>
@@ -150,16 +158,15 @@ class Landing extends Component {
               Submit
             </button>
           </form>
-          <h3>Banking Details:</h3>
-          <p>Dogtown SA</p>
-          <p>Absa Bank</p>
-          <p>Cheque Account</p>
-          <p>Account: 905 385 4128</p>
+          <p>OR</p>
+          <a className="donate" href="https://www.givengain.com/cc/dewald--lourika-are-cycling-to-save-more-lives/">
+          GO DIRECTLY TO DONATION
+        </a>
         </div>
-        {info}
+        {display}
       </div>
     );
   }
 }
 
-export default Landing;
+export default withRouter(Landing);

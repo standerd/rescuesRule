@@ -2,4 +2,48 @@
   width: 95%;
   margin: 1% auto;
   text-align: center;
+  height: auto;
+  background-color: rgb(85, 136, 214);
+  color: white;
+  padding: 2%;
+}
+
+.thanks a{
+  text-decoration: none;
+  font-size: 1.3rem;
+  width: 45%;
+  display: block;
+  margin: 1% auto;
+  background-color: rgb(235, 150, 94);
+  padding: 1%;
+  border-radius: 10px;
+  color: white;
+}
+
+.shirts{
+  width: 30%;
+  margin-bottom: 1%;
+
+}
+
+.inner{
+  border: 2px solid rgb(235, 150, 94);
+  width: 80%;
+  margin: 1% auto;
+}
+
+.inner img{
+  border: 2px solid rgb(235, 150, 94);
+}
+
+@media only screen and (max-width: 768px) {
+  .inner img {
+   width: 80%;
+  }
+  
+  .thanks a{
+    width: 90%;
+    font-size: 0.9rem;
+  }
+
 }
