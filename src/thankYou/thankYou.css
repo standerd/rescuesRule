@@ -6,6 +6,7 @@
   background-color: rgb(85, 136, 214);
   color: white;
   padding: 2%;
+  font-family: Arial, Helvetica, sans-serif;
 }
 
 .thanks a{
@@ -18,12 +19,16 @@
   padding: 1%;
   border-radius: 10px;
   color: white;
+  font-weight: bold;
 }
 
 .shirts{
   width: 30%;
   margin-bottom: 1%;
+}
 
+.thanks p{
+  font-size: 1.2rem;
 }
 
 .inner{

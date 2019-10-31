@@ -16,7 +16,7 @@ const thankYou = props => {
           some new tricks.
         </h3>
         <p>If you are riding or supporting the 947 RideJoburg </p>
-        <p>be on the lookout for us, We are wearing special shirts.</p>
+        <p>be on the lookout for us, we will be wearing these shirts:</p>
         <img
           className="shirts"
           src={require("../images/shirts.jpg")}

@@ -158,10 +158,6 @@ class Landing extends Component {
               Submit
             </button>
           </form>
-          <p>OR</p>
-          <a className="donate" href="https://www.givengain.com/cc/dewald--lourika-are-cycling-to-save-more-lives/">
-          GO DIRECTLY TO DONATION
-        </a>
         </div>
         {display}
       </div>
